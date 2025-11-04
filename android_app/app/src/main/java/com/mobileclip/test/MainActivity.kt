@@ -1,6 +1,7 @@
 package com.mobileclip.test
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
@@ -37,9 +38,10 @@ class MainActivity : AppCompatActivity() {
                 val result = withContext(Dispatchers.IO) {
                     runTestAsync()
                 }
+                Log.d("MainActivity", result)
                 tvResults.text = result
-            } catch (e: Exception) {
-                tvResults.text = "Error running test:\n${e.message}\n\n${e.stackTraceToString()}"
+//            } catch (e: Exception) {
+//                tvResults.text = "Error running test:\n${e.message}\n\n${e.stackTraceToString()}"
             } finally {
                 btnRunTest.isEnabled = true
             }
@@ -59,13 +61,12 @@ class MainActivity : AppCompatActivity() {
 
         // Define test images and texts (matching the Python test)
         val imageAssetPaths = listOf(
-            "images/cat.jpeg"
-            // Add more images here if you have them:
-            // "images/dog.jpeg",
-            // "images/bird.jpeg"
+            "images/cat.jpeg",
+            "images/dog.jpg",
+            "images/bicycle.jpg"
         )
 
-        val texts = listOf("a bird", "a cat", "a dog")
+        val texts = listOf("a bird", "a cat", "a black cat", "a white cat", "a dog", "a bicycle")
 
         // Run inference
         sb.append("Running inference...\n\n")

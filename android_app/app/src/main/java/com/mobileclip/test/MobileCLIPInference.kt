@@ -3,6 +3,7 @@ package com.mobileclip.test
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import org.pytorch.executorch.EValue
 import org.pytorch.executorch.Module
 import java.io.File
 import kotlin.math.exp
@@ -128,11 +129,11 @@ class MobileCLIPInference(private val context: Context) {
         )
 
         // Run inference
-        val output = imageModule!!.forward(inputTensor)
+        val output = imageModule!!.forward(EValue.from(inputTensor))
         val outputTensor = output[0]
 
         // Extract features (shape: [1, 512])
-        return outputTensor.dataAsFloatArray
+        return outputTensor.toTensor().dataAsFloatArray
     }
 
     /**
@@ -148,11 +149,11 @@ class MobileCLIPInference(private val context: Context) {
         )
 
         // Run inference
-        val output = textModule!!.forward(inputTensor)
+        val output = textModule!!.forward(EValue.from(inputTensor))
         val outputTensor = output[0]
 
         // Extract features (shape: [1, 512])
-        return outputTensor.dataAsFloatArray
+        return outputTensor.toTensor().dataAsFloatArray
     }
 
     /**

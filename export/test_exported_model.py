@@ -73,7 +73,8 @@ def test_executorch_inference(image_path, texts):
 
 
 if __name__ == "__main__":
-    image_path = "test_images/cat.jpeg"
-    texts = ["a bird", "a cat", "a dog"]
+    texts = ["a bird", "a cat", "a black cat", "a white cat", "a dog", "a bicycle"]
 
-    test_executorch_inference(image_path, texts)
+    test_executorch_inference("test_images/cat.jpeg", texts)
+    test_executorch_inference("test_images/dog.jpg", texts)
+    test_executorch_inference("test_images/bicycle.jpg", texts)

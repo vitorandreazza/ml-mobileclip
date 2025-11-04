@@ -199,21 +199,21 @@ class CLIPTokenizer(context: Context) {
      * Full encoding with SOT, EOT, and padding to context length.
      * This is the main method to use for model input.
      */
-    fun encodeFull(text: String): IntArray {
+    fun encodeFull(text: String): LongArray {
         val tokens = encode(text)
-        val fullTokens = IntArray(contextLength) { 0 } // Initialize with padding
+        val fullTokens = LongArray(contextLength) { 0 } // Initialize with padding
 
         // Add SOT token
-        fullTokens[0] = encoder["<|startoftext|>"]!!
+        fullTokens[0] = encoder["<|startoftext|>"]!!.toLong()
 
         // Add text tokens (truncate if necessary)
         val maxTokens = minOf(tokens.size, contextLength - 2)
         for (i in 0 until maxTokens) {
-            fullTokens[i + 1] = tokens[i]
+            fullTokens[i + 1] = tokens[i].toLong()
         }
 
         // Add EOT token
-        fullTokens[maxTokens + 1] = encoder["<|endoftext|>"]!!
+        fullTokens[maxTokens + 1] = encoder["<|endoftext|>"]!!.toLong()
 
         return fullTokens
     }
