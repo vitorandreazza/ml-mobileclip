@@ -1,0 +1,10 @@
+Place the following ExecuTorch model files here:
+
+1. mobileclip-s2_visual.pte
+2. mobileclip-s2_text.pte
+
+To generate these files, run:
+  cd ../../../../../../export
+  python mobileclip_export.py
+
+Then copy the generated files from export/models/ to this directory.
