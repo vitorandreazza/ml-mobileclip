@@ -122,14 +122,14 @@ The app will show:
 
 ### Image Preprocessing
 
-The `ImagePreprocessor` class implements the same preprocessing pipeline as OpenCLIP:
+The `ImagePreprocessor` class implements the correct preprocessing pipeline for MobileCLIP:
 
 1. **Resize**: Scale to 256x256 using bilinear interpolation
 2. **Center Crop**: Crop center 256x256 region
-3. **Normalize**: Apply per-channel normalization
-   - Mean: `[0.48145466, 0.4578275, 0.40821073]`
-   - Std: `[0.26862954, 0.26130258, 0.27577711]`
+3. **ToTensor**: Convert to float array with values in [0, 1] range
 4. **Format**: Output as CHW (channels × height × width) float array
+
+**Important**: Unlike standard CLIP models, MobileCLIP does NOT use ImageNet mean/std normalization. The model expects pixel values in the [0, 1] range without any normalization
 
 ### Text Tokenization
 
